@@ -2,7 +2,7 @@
 import { Component } from 'react';
 import './App.css';
 import Person from './Person/Person'
-import Radium from 'radium'
+import Radium, {StyleRoot} from 'radium'
 
 class App extends Component {
   state = {
@@ -51,23 +51,25 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button>
-        {
-          this.state.showPersons ?
-            <div>
-              {this.state.persons.map((person, index) => {
-                return <Person
-                  name={person.name}
-                  age={person.age}
-                  click={() => this.deletePersonHandler(index)}
-                  key={person.id}
-                  changed={(event) => this.nameChangedHandler(event, person.id)} />
-              })}
-            </div>
-            : <h1>No persons to show</h1>
-        }
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button>
+          {
+            this.state.showPersons ?
+              <div>
+                {this.state.persons.map((person, index) => {
+                  return <Person
+                    name={person.name}
+                    age={person.age}
+                    click={() => this.deletePersonHandler(index)}
+                    key={person.id}
+                    changed={(event) => this.nameChangedHandler(event, person.id)} />
+                })}
+              </div>
+              : <h1>No persons to show</h1>
+          }
+        </div>
+      </StyleRoot>
     );
   }
 }
