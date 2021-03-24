@@ -2,6 +2,7 @@
 import { Component } from 'react';
 import './App.css';
 import Person from './Person/Person'
+import Radium from 'radium'
 
 class App extends Component {
   state = {
@@ -12,6 +13,7 @@ class App extends Component {
     ],
     showPersons: false
   }
+
 
   togglePersonHandler = () => {
     this.setState({ showPersons: !this.state.showPersons });
@@ -28,7 +30,7 @@ class App extends Component {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id
     })
-    const person = {...this.state.persons[personIndex]}
+    const person = { ...this.state.persons[personIndex] }
 
     person.name = event.target.value;
     const persons = [...this.state.persons]
@@ -40,9 +42,17 @@ class App extends Component {
 
 
   render() {
+    const style = {
+      backgroundColor: 'red',
+      color: 'white',
+      ':hover': {
+        backgroundColor: 'blue'
+      }
+    }
+
     return (
       <div className="App">
-        <button onClick={this.togglePersonHandler}>Toggle Persons</button>
+        <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button>
         {
           this.state.showPersons ?
             <div>
@@ -62,4 +72,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
